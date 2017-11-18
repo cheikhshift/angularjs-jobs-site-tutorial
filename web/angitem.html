@@ -1,0 +1,6 @@
+<div style="padding:5px;margin:5px;border:1px solid #333;">
+	<h3><b>{{ job.Title }}</b></h3>
+	<p> {{job.Location }} | <a href="mailto:{{ job.Author }}"> {{ job.Author }} </a></p>
+	<p style="color:#333"><time am-time-ago="job.Time"></time> </p>
+	<textarea readonly >{{ job.Description }}</textarea>
+</div>

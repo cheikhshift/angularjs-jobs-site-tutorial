@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>Angular TEST</title>
+	{{ang}}
+	{{server}}
+	<!-- load momentJS (required for angular-moment) -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+	<!-- load angular-moment -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+</head>
+<body ng-controller="ExampleController">
+
+<style type="text/css">
+	
+	html,body {
+		padding:25px;
+		max-width: 1000px;
+		margin:0 auto;
+	}
+
+	.floatdiv {
+		float:left;
+		min-width: 210px;
+		width:40%%;
+	}
+	.item {
+		border-bottom:1px #333 dotted;
+	}
+	.item textarea {
+		height: 240px;
+		width:100%%;
+	}
+
+	/*
+	angular validation colors 
+	*/
+  .css-form input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+
+  .css-form input.ng-valid.ng-touched {
+    background-color: #78FA89;
+  }
+</style>
+
+<div class="floatdiv">
+	<h3>Create a listing : </h3>
+	{{ AngularForm Job "/momentum/funcs?name=AddJob" "save(data)" "Post job" "data" .Session }}
+</div>
+<div class="floatdiv">
+	<h1> Jobs </h1>
+	<div class="item" ng-repeat="job in jobs">
+		{{ LoadWebAsset "/angitem.html" }}
+	</div>
+</div>
+<script type="text/javascript">
+	
+
+    angular.module('app', ['angularMoment'])
+    .controller('ExampleController', ['$scope', function($scope) {
+  
+      Jobs(function(result){
+      	 $scope.jobs = result.returnjobs;
+      	 $scope.$apply();
+      })
+
+      $scope.save = function(data) {
+      		AddJob(data,function(result){
+      			$scope.jobs = result.returnjobs;
+      			$scope.data = {}
+      			$scope.$apply();
+      		})
+      };
+
+    }]);
+</script>
+</body>
+</html>

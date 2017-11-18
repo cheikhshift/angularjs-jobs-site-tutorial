@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gos>
+	<!-- xml docs : http://golangserver.com/docs/markup.html -->
+	<deploy>webapp</deploy>
+	<port>8080</port>
+	<package>if-package-is-library</package>
+	<not_found>/your-404-page</not_found>
+	<error>/your-500-page</error>
+
+	<output>application.go</output>
+	<domain></domain><!-- Cookie domain -->
+	<import src="github.com/cheikhshift/form/gos.gxml"/>
+	<import src="github.com/cheikhshift/momentum/gos.gxml"/>
+	<import src="time"/>
+	<var>jobs = []Job{}</var>
+
+
+	<main>	
+		//psss go code here : func main()
+
+	</main>
+
+
+	<key>a very very very very secret key</key>
+	
+	<header> 
+
+	<struct name="Job">
+		Title string `title:"Title of post",valid:"unique",placeholder:"Testfield prompt"`
+	 	Location string `title:"Address of job",placeholder:"123 Smith St."`
+	 	Author netform.Email `title:"Contact e-mail address",valid:"email,required",placeholder:"@",`
+	 	Description netform.Paragraph `title:"Job description :",valid:"unique"`
+	 	Time time.Time
+	</struct>
+
+	</header>
+	<methods>
+		<func name="Jobs" return="(returnjobs []Job)">
+			returnjobs = jobs
+			return
+		</func>
+		<func name="AddJob" var="job Job" return="(returnjobs []Job)" >
+
+			job.Time = time.Now()
+			jobs = append([]Job{job}, jobs...)
+			//New list of jobs
+			returnjobs = jobs
+			return
+		</func>
+	</methods>
+
+	<templates>
+
+	</templates>
+	<endpoints>
+  
+	</endpoints>
+</gos>
